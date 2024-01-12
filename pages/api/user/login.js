@@ -41,7 +41,7 @@ const loginUser = async (req, res) => {
         .json({ message: "ユーザーログイン失敗：ユーザー登録をしてください" });
     }
   } catch (error) {
-    console.log("データなし");
+    // console.log("データなし");
     return res.status(400).json({ message: "ユーザーログイン失敗" });
   }
 };

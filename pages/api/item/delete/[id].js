@@ -10,7 +10,7 @@ const deleteItem = async (req, res) => {
     const singleItem = await ItemModel.findById(req.query.id);
     // アイテムデータにあるemailと、リクエストのemail（トークン内のemail）が一致したら更新する
     // この処理は、他のユーザーが、自分のアイテムを編集できないようにするための処理
-    if (singleItem.email !== req.body.email) {
+    if (singleItem.email === req.body.email) {
       // updateOneの第一引数（idを指定する部分）は直接idを指定するのではなく、
       // {_id: req.query.id} と指定する必要がある
       // 第2引数は更新するデータ（req.body）を指定する
