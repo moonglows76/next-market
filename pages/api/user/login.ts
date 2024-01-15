@@ -1,3 +1,4 @@
+import type { NextApiResponse } from "next";
 //  ログイン状態を維持する仕組みとして、トークン方式を使用する
 // トークンは長い文字列で、ユーザーの情報を暗号化したもの
 // jsonwebtokenは、トークンを生成するためのライブラリ
@@ -8,14 +9,15 @@ import jwt from "jsonwebtoken";
 
 import connectDB from "../../../utils/database";
 import { UserModel } from "../../../utils/schemaModels";
+import { ExtendNextApiRequestUser, SavedUserDataType, ResMessageType } from "../../../utils/types";
 
 const secret_key = "nextmarket";
 
-const loginUser = async (req, res) => {
+const loginUser = async (req: ExtendNextApiRequestUser, res: NextApiResponse<ResMessageType>) => {
   try {
     await connectDB();
     // 入力されたメールアドレスを持つユーザーを探す
-    const savedUserData = await UserModel.findOne({ email: req.body.email });
+    const savedUserData: SavedUserDataType | null = await UserModel.findOne({ email: req.body.email });
     if (savedUserData) {
       if (req.body.password === savedUserData.password) {
         // パスワードが正しいときの処理
