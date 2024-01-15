@@ -42,7 +42,7 @@ export interface ExtendedNextApiRequestAuth extends NextApiRequest {
 // Common
 export interface ResMessageType {
   message: string;
-  token?: string;
+  token?: string; // ?をつけると必須ではなくなる
 }
 
 // register.ts, login.ts
@@ -56,4 +56,29 @@ export interface ExtendNextApiRequestUser extends NextApiRequest {
 // UserDataTypeに_idを追加するのでextendsを使う
 export interface SavedUserDataType extends UserDataType {
   _id: Types.ObjectId;
+}
+
+// readAll.ts, [id].ts, update/[id].ts, delete/[id].ts
+// MongoDBに保存された商品データの型を定義
+// ItemDataTypeに_idを追加するのでextendsを使う
+export interface SavedItemDataType extends ItemDataType {
+  _id: Types.ObjectId;
+}
+
+// readAll.ts
+// MongoDBから取得した商品データの型を定義
+export interface ResReadAllType {
+  message: string;
+  allItems?: SavedItemDataType[];
+}
+
+// create.ts
+export interface ExtendedNextApiRequestItem extends NextApiRequest {
+  body: ItemDataType;
+}
+
+// [id].ts
+export interface ResReadSingleType {
+  message: string;
+  singleItem?: SavedItemDataType;
 }
