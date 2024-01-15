@@ -13,7 +13,8 @@ const UpdateItem = (props) => {
     try {
       // console.log(props.singleItem._id)
       const response = await fetch(
-        `https://next-market-rho.vercel.app/api/item/update/${props.singleItem._id}`,
+        process.env.NEXT_PUBLIC_HOST +
+          `/api/item/update/${props.singleItem._id}`,
         {
           method: "POST",
           headers: {
@@ -97,7 +98,7 @@ export default UpdateItem;
 
 export async function getServerSideProps(context) {
   const response = await fetch(
-    `https://next-market-rho.vercel.app/api/item/${context.query.id}`
+    process.env.NEXT_PUBLIC_HOST + `/api/item/${context.query.id}`
   );
   const singleItem = await response.json();
   return {

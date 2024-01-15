@@ -33,7 +33,7 @@ export const getServerSideProps = async () => {
   // fetchはサーバーサイドで実行される
   // 全アイテムのデータを取得する
   const response = await fetch(
-    "https://next-market-rho.vercel.app/api/item/readall"
+    process.env.NEXT_PUBLIC_HOST + "/api/item/readall"
   );
   // レスポンスをJSONに変換
   const allItems = await response.json();

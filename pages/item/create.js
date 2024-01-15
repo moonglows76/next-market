@@ -12,7 +12,7 @@ const CreateItem = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://next-market-rho.vercel.app/api/item/create",
+        process.env.NEXT_PUBLIC_HOST + "/api/item/create",
         {
           method: "POST",
           headers: {

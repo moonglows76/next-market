@@ -41,7 +41,7 @@ export default ReadSingleItem;
 // URL情報がcontextに入っている
 export const getServerSideProps = async (context) => {
   const response = await fetch(
-    `https://next-market-rho.vercel.app/api/item/${context.query.id}`
+    process.env.NEXT_PUBLIC_HOST + `/api/item/${context.query.id}`
   );
   const singleItem = await response.json();
   return {

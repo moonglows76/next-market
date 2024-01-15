@@ -25,7 +25,7 @@ const Register = () => {
     // フォームの値をJSONに変換して送信
     try {
       const response = await fetch(
-        "https://next-market-rho.vercel.app/api/user/register",
+        process.env.NEXT_PUBLIC_HOST + "/api/user/register",
         {
           // POSTで送信する
           method: "POST",

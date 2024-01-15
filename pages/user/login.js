@@ -10,23 +10,21 @@ const Login = () => {
     e.preventDefault();
     // フォームの値をJSONに変換して送信
     try {
-      const response = await fetch(
-        "https://next-market-rho.vercel.app/api/user/login",
-        {
-          // POSTで送信する
-          method: "POST",
-          // ヘッダーにJSON形式のデータを含める
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          // フォームの値をJSONに変換して送信
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        }
-      );
+      const url = process.env.NEXT_PUBLIC_HOST + "/api/user/login";
+      const response = await fetch(url, {
+        // POSTで送信する
+        method: "POST",
+        // ヘッダーにJSON形式のデータを含める
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        // フォームの値をJSONに変換して送信
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
       const jsonData = await response.json();
       localStorage.setItem("token", jsonData.token);
       alert(jsonData.message);
