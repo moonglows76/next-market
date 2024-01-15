@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { ItemDataType, UserDataType } from "./types"
 
 // mongooseに入れるデータ形式（スキーマ）を定義するオブジェクト
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // mongooseに入れる商品スキーマを定義
-const ItemSchema = new schema({
+const ItemSchema = new Schema<ItemDataType>({
   title: String,
   image: String,
   price: String,
@@ -13,7 +14,7 @@ const ItemSchema = new schema({
 });
 
 // mongooseに入れるユーザースキーマを定義
-const UserSchema = new schema({
+const UserSchema = new Schema<UserDataType>({
   name: {
     type: String,
     required: true,
@@ -32,6 +33,6 @@ const UserSchema = new schema({
 // 上で作ったスキーマを持つModelを作り、エクスポートする
 // モデル … 読み取り、書き込み、更新、削除の処理を行う
 export const ItemModel =
-  mongoose.models.Item || mongoose.model("Item", ItemSchema);
+  mongoose.models.Item || mongoose.model<ItemDataType>("Item", ItemSchema);
 export const UserModel =
-  mongoose.models.User || mongoose.model("User", UserSchema);
+  mongoose.models.User || mongoose.model<UserDataType>("User", UserSchema);
