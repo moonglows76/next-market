@@ -1,9 +1,13 @@
+import type { NextPage, GetServerSideProps } from "next";
+
 // import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 
-const ReadAllItems = (props) => {
+import { ReadAllDataType } from "../utils/types";
+
+const ReadAllItems: NextPage<ReadAllDataType> = (props) => {
   // const [itemData, setItemData] = useState("");
 
   // useEffectはレンダリング後に実行される関数
@@ -69,7 +73,7 @@ export default ReadAllItems;
 
 // getStaticPropsはサーバーサイドで実行される関数
 // スタティック・ジェネレーション用の関数
-export const getStaticProps = async () => {
+export const getStaticProps: GetServerSideProps<ReadAllDataType> = async () => {
   // fetchはサーバーサイドで実行される
   // 全アイテムのデータを取得する
   const response = await fetch(

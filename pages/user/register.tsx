@@ -1,7 +1,8 @@
+import type { NextPage } from "next";
 import { useState } from "react";
 import Head from "next/head";
 
-const Register = () => {
+const Register: NextPage = () => {
   // 名前を格納するstate
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const Register = () => {
   // };
 
   // フォームが送信された時の処理
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // ページ遷移を防ぐ
     e.preventDefault();
     // フォームの値をJSONに変換して送信

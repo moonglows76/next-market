@@ -1,11 +1,12 @@
+import type { NextPage } from "next";
 import { useState } from "react";
 import Head from "next/head";
 
-const Login = () => {
+const Login: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // ページ遷移を防ぐ
     e.preventDefault();
     // フォームの値をJSONに変換して送信

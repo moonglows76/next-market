@@ -1,14 +1,16 @@
+import type { NextPage, GetServerSideProps } from "next";
 import { useState } from "react";
-import useAuth from "@/utils/useAuth";
+import useAuth from "../../../utils/useAuth";
 import Head from "next/head";
+import { ReadSingleDataType } from "../../../utils/types";
 
-const UpdateItem = (props) => {
+const UpdateItem: NextPage<ReadSingleDataType> = (props) => {
   const [title, setTitle] = useState(props.singleItem.title);
   const [price, setPrice] = useState(props.singleItem.price);
   const [image, setImage] = useState(props.singleItem.image);
   const [description, setDescription] = useState(props.singleItem.description);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       // console.log(props.singleItem._id)
@@ -96,7 +98,9 @@ const UpdateItem = (props) => {
 
 export default UpdateItem;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<
+  ReadSingleDataType
+> = async (context) => {
   const response = await fetch(
     process.env.NEXT_PUBLIC_HOST + `/api/item/${context.query.id}`
   );
@@ -104,4 +108,4 @@ export async function getServerSideProps(context) {
   return {
     props: singleItem,
   };
-}
+};

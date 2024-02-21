@@ -1,8 +1,10 @@
+import type { NextPage, GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import { ReadSingleDataType } from "../../utils/types";
 
-const ReadSingleItem = (props) => {
+const ReadSingleItem: NextPage<ReadSingleDataType> = (props) => {
   // console.log(props)
   return (
     <div className="grid-container-si">
@@ -39,7 +41,9 @@ export default ReadSingleItem;
 
 // getServerSidePropsでサーバからデータを取得する
 // URL情報がcontextに入っている
-export const getServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<
+  ReadSingleDataType
+> = async (context) => {
   const response = await fetch(
     process.env.NEXT_PUBLIC_HOST + `/api/item/${context.query.id}`
   );
